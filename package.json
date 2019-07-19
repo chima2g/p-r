@@ -1,0 +1,19 @@
+{
+  "name": "pure_retirement",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node createCommissionFiles.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  },
+  "dependencies": {
+    "fast-csv": "^3.1.0"
+  }
+}
