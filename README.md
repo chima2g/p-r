@@ -13,10 +13,7 @@ git clone https://github.com/chima2g/p-r.git
 - Run `npm i` 
 - Run `npm test` to run the unit tests
 - Run `npm start` to generate the required csv files  
-This generates files basicPay.csv
-bonus1Pay.csv
-bonus2Pay.csv
-bonusSummary.csv
+This generates files basicPay.csv, bonus1Pay.csv, bonus2Pay.csv & bonusSummary.csv
 
 # Assumptions
 
