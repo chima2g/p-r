@@ -7,9 +7,9 @@ Completed tech test
 - Clone the repo from your terminal using the following command:
 
 ```bash
-git clone https://github.com/chima2g/pure-retirement.git 
+git clone https://github.com/chima2g/p-r.git
 ```
-- Run `cd ./pure-retirement`
+- Run `cd ./p-r`
 - Run `npm i` 
 - Run `npm test` to run the unit tests
 - Run `npm start` to generate the required csv files  
