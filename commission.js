@@ -220,8 +220,3 @@ module.exports = {
   BONUS_TYPE_2,
   CURRENCY_LOOKUP
 };
-
-//TODO: Read everything over, especially comments
-//TODO: Solid principles
-//TODO: getCommissionData should take the bonusCalculation as a function
-//TODO: Should I use class inheritance to showcase the open/close principle on £ / $
