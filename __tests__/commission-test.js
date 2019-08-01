@@ -243,7 +243,7 @@ describe("getCommissionSummaryData", () => {
     ]);
   });
 
-  test("getCommissionSummaryData returns an array of total commission data for a broker has a single case", () => {
+  test("getCommissionSummaryData returns an array of total commission data where a broker has a single case", () => {
     const caseData = [
       ["BrokerName", "CaseId", "BaseCommission", "BonusCommission"],
       ["Emmá", "12", "£125", "£10"]
@@ -266,15 +266,18 @@ describe("getCommissionSummaryData", () => {
     ]);
   });
 
-  test("getCommissionSummaryData returns an array of total commission data for an array of cases", () => {
+  test("getCommissionSummaryData returns an array of total commission data for an array multiple brokers' cases", () => {
     const caseData = [
       ["BrokerName", "CaseId", "BaseCommission", "BonusCommission"],
       ["Emmá", "12", "£125", "£0"],
-      ["Emmá", "12", "£125", "£60"]
+      ["Emmá", "13", "£125", "£60"],
+      ["Ella", "14", "£125", "£0"],
+      ["Ella", "15", "£125", "£60"]
     ];
     expect(getCommissionSummaryData(caseData)).toEqual([
       ["BrokerName", "TotalCommission"],
-      ["Emmá", "£310"]
+      ["Emmá", "£310"],
+      ["Ella", "£310"]
     ]);
   });
 });
@@ -290,7 +293,33 @@ describe("getCaseCommissionData", () => {
     );
   });
 
-  test("getCaseCommissionData returns a CSV string of commission data for a given CSV string of broker data", () => {
+  test("getCaseCommissionData returns a CSV string of commission data for a CSV string containing a single entry of a single brokers' data", () => {
+    const csvStr =
+      "BrokerName,CaseId,BaseCommission,BonusCommission\r\n" +
+      "Emma,3,£125,£300.00";
+
+    const output = "BrokerName,TotalCommission\r\n" + "Emma,£425";
+
+    expect(getCaseCommissionData(csvStr, getCommissionSummaryData)).toEqual(
+      output
+    );
+  });
+
+  test("getCaseCommissionData returns a CSV string of commission data for a CSV string containing multiple entries of a single brokers' data", () => {
+    const csvStr =
+      "BrokerName,CaseId,BaseCommission,BonusCommission\r\n" +
+      "Emma,1,£125,£100.00\r\n" +
+      "Emma,2,£125,£200.00\r\n" +
+      "Emma,3,£125,£300.00";
+
+    const output = "BrokerName,TotalCommission\r\n" + "Emma,£975";
+
+    expect(getCaseCommissionData(csvStr, getCommissionSummaryData)).toEqual(
+      output
+    );
+  });
+
+  test("getCaseCommissionData returns a CSV string of commission data for a CSV string of multiple brokers' data", () => {
     const csvStr =
       "BrokerName,CaseId,BaseCommission,BonusCommission\r\n" +
       "Emma,1,£125,£100.00\r\n" +
