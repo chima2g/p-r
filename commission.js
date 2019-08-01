@@ -24,15 +24,21 @@ const CURRENCY_LOOKUP = { $: 0.8 }; //Lookup object for converting foreign curre
  */
 const convertCSVStrToArr = csvStr => {
   const lines = csvStr.split("\r\n"); //Get each line of the CSV string
-  const dataArr = [];
+  const reducer = (accumulator, line) => {
+    //Convert each line to an array of values and add that to the two dimensionsal array to be returned
+    accumulator.push(line.split(","));
+    return accumulator;
+  };
 
-  //Convert each line to an array of values and add the array to the array
-  lines.forEach(line => {
-    dataArr.push(line.split(","));
-  });
-
-  return dataArr;
+  return lines.reduce(reducer, []);
 };
+
+console.log(
+  [0, 1, 2, 3, 4].reduce((accumulator, currentValue, currentIndex, array) => {
+    accumulator.push(currentValue);
+    return accumulator;
+  }, [])
+);
 
 /**
  * Converts an array of data to a CSV string
