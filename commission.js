@@ -60,10 +60,10 @@ const convertArrayToCSVStr = dataArr => {
 const convertCasesToGBP = (brokerCases, conversionLookup) => {
   const [header, ...cases] = brokerCases;
 
-  const converted = brokerCases.slice(1).map(_case => {
-    const [BrokerName, CaseId, CaseValue] = _case;
+  const converted = brokerCases.slice(1).map(brokerCase => {
+    const [BrokerName, CaseId, CaseValue] = brokerCase;
 
-    if (CaseValue.startsWith("£")) return _case;
+    if (CaseValue.startsWith("£")) return brokerCase;
     else {
       const conversionRate = conversionLookup[CaseValue.slice(0, 1)];
       const gbpVal = parseFloat(CaseValue.slice(1) * conversionRate).toFixed(2); //Calculate the converted amount
@@ -116,7 +116,7 @@ const getCommissionData = (brokerCases, bonusCalculation) => {
 
     if (bonusCalculation) {
       //Calculate the bonus amount for the first bonus structure
-      const bonus = bonusCalculator(
+      let bonus = bonusCalculator(
         CaseValue,
         THRESHOLD_AMOUNT_1,
         TARGET_AMOUNT_1
@@ -130,7 +130,7 @@ const getCommissionData = (brokerCases, bonusCalculation) => {
           TARGET_AMOUNT_2
         );
 
-      commissionArr.push(`£${bonus}`); //Add the bonus key value pair to the commission array
+      commissionArr.push(`£${bonus}`); //Add the bonus to the commission array
     }
 
     return commissionArr; // Return the commission array
