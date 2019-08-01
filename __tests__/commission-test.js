@@ -20,6 +20,17 @@ describe("convertCSVStrToArr", () => {
     expect(convertCSVStrToArr(csvStr)).toEqual(outputArr);
   });
 
+  test("convertCSVStrToArr returns an array given a single entry a CSV string", () => {
+    const csvStr = "BrokerName,CaseId,CaseValue\r\n" + "Emma,1,£103133.02";
+
+    const outputArr = [
+      ["BrokerName", "CaseId", "CaseValue"],
+      ["Emma", "1", "£103133.02"]
+    ];
+
+    expect(convertCSVStrToArr(csvStr)).toEqual(outputArr);
+  });
+
   test("convertCSVStrToArr returns an array of all the values in a CSV string", () => {
     const csvStr =
       "BrokerName,CaseId,CaseValue\r\n" +
@@ -41,6 +52,13 @@ describe("convertCSVStrToArr", () => {
 });
 
 describe("convertArrayToCSVStr", () => {
+  test("convertArrayToCSVStr returns a CSV string for an array of data containing no entries", () => {
+    const inputArr = [["BrokerName", "CaseId", "CaseValue"]];
+    const csvStr = "BrokerName,CaseId,CaseValue";
+
+    expect(convertArrayToCSVStr(inputArr)).toEqual(csvStr);
+  });
+
   test("convertArrayToCSVStr returns a CSV string for a given array of data", () => {
     const inputArr = [
       ["BrokerName", "CaseId", "CaseValue"],
