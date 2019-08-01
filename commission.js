@@ -58,8 +58,7 @@ const convertArrayToCSVStr = dataArr => {
  * @return {array}                An array of broker cases with CaseValues converted to GBP
  */
 const convertCasesToGBP = (brokerCases, conversionLookup) => {
-  // const header = brokerCases[0];
-  const [header, ...rest] = brokerCases;
+  const [header, ...cases] = brokerCases;
 
   const converted = brokerCases.slice(1).map(_case => {
     const [BrokerName, CaseId, CaseValue] = _case;
@@ -69,7 +68,7 @@ const convertCasesToGBP = (brokerCases, conversionLookup) => {
       const conversionRate = conversionLookup[CaseValue.slice(0, 1)];
       const gbpVal = parseFloat(CaseValue.slice(1) * conversionRate).toFixed(2); //Calculate the converted amount
 
-      return [BrokerName, CaseId, `£${gbpVal}`]; //return a new object with the converted amount
+      return [BrokerName, CaseId, `£${gbpVal}`]; //return a new array with the converted amount
     }
   });
 
@@ -112,8 +111,8 @@ const getCommissionData = (brokerCases, bonusCalculation) => {
   let commisionArr = gBPBrokerCases.slice(1).map(brokerCase => {
     const [BrokerName, CaseId, CaseValue] = brokerCase;
 
-    //Commission object including the base commission amount
-    let commissionObj = [BrokerName, CaseId, `£${BASE_COMMISSION}`];
+    //Commission array including the base commission amount
+    const commissionArr = [BrokerName, CaseId, `£${BASE_COMMISSION}`];
 
     if (bonusCalculation) {
       //Calculate the bonus amount for the first bonus structure
@@ -131,10 +130,10 @@ const getCommissionData = (brokerCases, bonusCalculation) => {
           TARGET_AMOUNT_2
         );
 
-      commissionObj.push(`£${bonus}`); //Add the bonus key value pair to the commission object
+      commissionArr.push(`£${bonus}`); //Add the bonus key value pair to the commission array
     }
 
-    return commissionObj; // Return the commission object
+    return commissionArr; // Return the commission array
   });
 
   //Add the CSV header onto the beginning of the array
