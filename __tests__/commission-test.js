@@ -31,7 +31,7 @@ describe("convertCSVStrToArr", () => {
     expect(convertCSVStrToArr(csvStr)).toEqual(outputArr);
   });
 
-  test("convertCSVStrToArr returns an array of all the values in a CSV string", () => {
+  test("convertCSVStrToArr returns an array of all the values given multiple entries in a CSV string", () => {
     const csvStr =
       "BrokerName,CaseId,CaseValue\r\n" +
       "Emma,1,£103133.02\r\n" +
@@ -59,7 +59,18 @@ describe("convertArrayToCSVStr", () => {
     expect(convertArrayToCSVStr(inputArr)).toEqual(csvStr);
   });
 
-  test("convertArrayToCSVStr returns a CSV string for a given array of data", () => {
+  test("convertArrayToCSVStr returns a CSV string for an array of data containing a single entry", () => {
+    const inputArr = [
+      ["BrokerName", "CaseId", "CaseValue"],
+      ["Emma", "1", "£103133.02"]
+    ];
+
+    const csvStr = "BrokerName,CaseId,CaseValue\r\n" + "Emma,1,£103133.02";
+
+    expect(convertArrayToCSVStr(inputArr)).toEqual(csvStr);
+  });
+
+  test("convertArrayToCSVStr returns a CSV string for an array of data containing multiple entries", () => {
     const inputArr = [
       ["BrokerName", "CaseId", "CaseValue"],
       ["Emma", "1", "£103133.02"],
@@ -80,7 +91,29 @@ describe("convertArrayToCSVStr", () => {
 });
 
 describe("convertCasesToGBP", () => {
-  test("convertCasesToGBP returns an array of cases changing the CaseValue amount to GBP", () => {
+  test("convertCasesToGBP returns correctly given an empty array of cases", () => {
+    const input_cases = [["BrokerName", "CaseId", "CaseValue"]];
+    const output_cases = [["BrokerName", "CaseId", "CaseValue"]];
+    expect(convertCasesToGBP(input_cases, CURRENCY_LOOKUP)).toEqual(
+      output_cases
+    );
+  });
+
+  test("convertCasesToGBP returns a single case given an array containing a single case", () => {
+    const input_cases = [
+      ["BrokerName", "CaseId", "CaseValue"],
+      ["Stacy", "3379", "$474584.18"]
+    ];
+    const output_cases = [
+      ["BrokerName", "CaseId", "CaseValue"],
+      ["Stacy", "3379", "£379667.34"]
+    ];
+    expect(convertCasesToGBP(input_cases, CURRENCY_LOOKUP)).toEqual(
+      output_cases
+    );
+  });
+
+  test("convertCasesToGBP returns an array of cases changing the CaseValue amount to GBP given multiple cases", () => {
     const input_cases = [
       ["BrokerName", "CaseId", "CaseValue"],
       ["Rob", "3378", "£404006.99"],
@@ -99,7 +132,6 @@ describe("convertCasesToGBP", () => {
 
 describe("bonusCalculator", () => {
   test("bonusCalculator returns the correct bonus for a case over £100,000", () => {
-    expect(bonusCalculator("£100000", 100000, 10000)).toBe(0);
     expect(bonusCalculator("£110000", 100000, 10000)).toBe(10);
     expect(bonusCalculator("£199999.99", 100000, 10000)).toBe(90);
     expect(bonusCalculator("£200000", 100000, 10000)).toBe(100);
