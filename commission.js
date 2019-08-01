@@ -86,7 +86,7 @@ const convertCasesToGBP = (brokerCases, conversionLookup) => {
  * @return {array}                  An array of broker cases including their commission
  */
 const bonusCalculator = (caseValue, threshold, target) => {
-  let caseValueAsFloat = parseFloat(caseValue.substring(1)); //Convert caseValue into float format
+  const caseValueAsFloat = parseFloat(caseValue.substring(1)); //Convert caseValue into float format
   let totalBonus = 0;
 
   //If the broker has hit the bonus threshold, calculate their bonus
