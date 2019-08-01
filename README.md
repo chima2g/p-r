@@ -17,6 +17,7 @@ This generates files basicPay.csv, bonus1Pay.csv, bonus2Pay.csv & bonusSummary.c
 
 # Assumptions
 
+- CSVs containing no cases will always at least contain the header
 - Bonus is not paid on a pro-rata basis, e.g. bonus is only paid for each whole amount of £10,000 over £100,000
 - It doesn't matter that values output to CSV are not padded to 2 decimal places as in the orignal CSV
 - CSVs for each of the two bonus structures will be generated from the original CSV provided
