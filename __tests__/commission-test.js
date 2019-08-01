@@ -20,17 +20,6 @@ describe("convertCSVStrToArr", () => {
     expect(convertCSVStrToArr(csvStr)).toEqual(outputArr);
   });
 
-  test("convertCSVStrToArr returns an array given a single entry a CSV string", () => {
-    const csvStr = "BrokerName,CaseId,CaseValue\r\n" + "Emma,1,£103133.02";
-
-    const outputArr = [
-      ["BrokerName", "CaseId", "CaseValue"],
-      ["Emma", "1", "£103133.02"]
-    ];
-
-    expect(convertCSVStrToArr(csvStr)).toEqual(outputArr);
-  });
-
   test("convertCSVStrToArr returns an array of all the values in a CSV string", () => {
     const csvStr =
       "BrokerName,CaseId,CaseValue\r\n" +
