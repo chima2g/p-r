@@ -150,6 +150,22 @@ describe("bonusCalculator", () => {
 });
 
 describe("getCommissionData", () => {
+  test("getCommissionData returns commission data for array containing no entries", () => {
+    const inputCaseA = [["BrokerName", "CaseId", "CaseValue"]];
+
+    const outputCaseA1 = [
+      ["BrokerName", "CaseId", "BaseCommission", "BonusCommission"]
+    ];
+
+    expect(getCommissionData(inputCaseA, BONUS_TYPE_1)).toEqual(outputCaseA1);
+
+    const outputCaseA2 = [
+      ["BrokerName", "CaseId", "BaseCommission", "BonusCommission"]
+    ];
+
+    expect(getCommissionData(inputCaseA, BONUS_TYPE_2)).toEqual(outputCaseA2);
+  });
+
   test("getCommissionData returns commission data for both bonus structures in pounds", () => {
     const inputCaseA = [
       ["BrokerName", "CaseId", "CaseValue"],
