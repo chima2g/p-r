@@ -10,7 +10,7 @@ Completed tech test
 git clone https://github.com/chima2g/p-r.git
 ```
 - Run `cd ./p-r`
-- Run `npm i` 
+- Run `npm install` 
 - Run `npm test` to run the unit tests
 - Run `npm start` to generate the required csv files  
 This generates files basicPay.csv, bonus1Pay.csv, bonus2Pay.csv & bonusSummary.csv
