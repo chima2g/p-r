@@ -131,6 +131,10 @@ describe("convertCasesToGBP", () => {
 });
 
 describe("bonusCalculator", () => {
+  test("bonusCalculator returns no bonus for a case £100,000 or less", () => {
+    expect(bonusCalculator("£100", 100000, 10000)).toBe(0);
+  });
+
   test("bonusCalculator returns the correct bonus for a case over £100,000", () => {
     expect(bonusCalculator("£110000", 100000, 10000)).toBe(10);
     expect(bonusCalculator("£199999.99", 100000, 10000)).toBe(90);
