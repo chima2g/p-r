@@ -234,6 +234,38 @@ describe("getCommissionData", () => {
 });
 
 describe("getCommissionSummaryData", () => {
+  test("getCommissionSummaryData returns an empty array for an empty array of cases", () => {
+    const caseData = [
+      ["BrokerName", "CaseId", "BaseCommission", "BonusCommission"]
+    ];
+    expect(getCommissionSummaryData(caseData)).toEqual([
+      ["BrokerName", "TotalCommission"]
+    ]);
+  });
+
+  test("getCommissionSummaryData returns an array of total commission data for a broker has a single case", () => {
+    const caseData = [
+      ["BrokerName", "CaseId", "BaseCommission", "BonusCommission"],
+      ["Emmá", "12", "£125", "£10"]
+    ];
+    expect(getCommissionSummaryData(caseData)).toEqual([
+      ["BrokerName", "TotalCommission"],
+      ["Emmá", "£135"]
+    ]);
+  });
+
+  test("getCommissionSummaryData returns an array of total commission data for an array where a broker has multiple cases", () => {
+    const caseData = [
+      ["BrokerName", "CaseId", "BaseCommission", "BonusCommission"],
+      ["Emmá", "12", "£125", "£0"],
+      ["Emmá", "12", "£125", "£60"]
+    ];
+    expect(getCommissionSummaryData(caseData)).toEqual([
+      ["BrokerName", "TotalCommission"],
+      ["Emmá", "£310"]
+    ]);
+  });
+
   test("getCommissionSummaryData returns an array of total commission data for an array of cases", () => {
     const caseData = [
       ["BrokerName", "CaseId", "BaseCommission", "BonusCommission"],
@@ -248,6 +280,16 @@ describe("getCommissionSummaryData", () => {
 });
 
 describe("getCaseCommissionData", () => {
+  test("getCaseCommissionData returns a CSV string of commission data for a CSV string containing no broker data", () => {
+    const csvStr = "BrokerName,CaseId,BaseCommission,BonusCommission";
+
+    const output = "BrokerName,TotalCommission";
+
+    expect(getCaseCommissionData(csvStr, getCommissionSummaryData)).toEqual(
+      output
+    );
+  });
+
   test("getCaseCommissionData returns a CSV string of commission data for a given CSV string of broker data", () => {
     const csvStr =
       "BrokerName,CaseId,BaseCommission,BonusCommission\r\n" +
