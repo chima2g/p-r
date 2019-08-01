@@ -33,13 +33,6 @@ const convertCSVStrToArr = csvStr => {
   return lines.reduce(reducer, []);
 };
 
-console.log(
-  [0, 1, 2, 3, 4].reduce((accumulator, currentValue, currentIndex, array) => {
-    accumulator.push(currentValue);
-    return accumulator;
-  }, [])
-);
-
 /**
  * Converts an array of data to a CSV string
  * @param {array} dataArr     An array of data to be converted to a CSV string

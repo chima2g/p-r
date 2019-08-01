@@ -190,19 +190,22 @@ describe("getCommissionData", () => {
   test("getCommissionData returns commission data for both bonus structures in pounds given multiple cases", () => {
     const inputCaseA = [
       ["BrokerName", "CaseId", "CaseValue"],
-      ["David", "2", "£607947.84"]
+      ["David", "2", "£607947.84"],
+      ["Ella", "3", "£638271.61"]
     ];
 
     const outputCaseA1 = [
       ["BrokerName", "CaseId", "BaseCommission", "BonusCommission"],
-      ["David", "2", "£125", "£500"]
+      ["David", "2", "£125", "£500"],
+      ["Ella", "3", "£125", "£530"]
     ];
 
     expect(getCommissionData(inputCaseA, BONUS_TYPE_1)).toEqual(outputCaseA1);
 
     const outputCaseA2 = [
       ["BrokerName", "CaseId", "BaseCommission", "BonusCommission"],
-      ["David", "2", "£125", "£570"]
+      ["David", "2", "£125", "£570"],
+      ["Ella", "3", "£125", "£600"]
     ];
 
     expect(getCommissionData(inputCaseA, BONUS_TYPE_2)).toEqual(outputCaseA2);
