@@ -116,7 +116,7 @@ const getCommissionData = (brokerCases, bonusCalculation) => {
 
     if (bonusCalculation) {
       //Calculate the bonus amount for the first bonus structure
-      let bonus = bonusCalculator(
+      const bonus = bonusCalculator(
         CaseValue,
         THRESHOLD_AMOUNT_1,
         TARGET_AMOUNT_1
