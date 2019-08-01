@@ -1,6 +1,6 @@
 # Introduction
 
-Completed tech test
+The requirements of this completed tech test can be found in [Technical test instructions.pdf](./Technical_test_instructions.pdf). An additional version of this has been completed in C# [here](https://github.com/chima2g/p-r-cs) 
 
 # Installation (linux)
 
