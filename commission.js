@@ -58,7 +58,8 @@ const convertArrayToCSVStr = dataArr => {
  * @return {array}                An array of broker cases with CaseValues converted to GBP
  */
 const convertCasesToGBP = (brokerCases, conversionLookup) => {
-  const header = brokerCases[0];
+  // const header = brokerCases[0];
+  const [header, ...rest] = brokerCases;
 
   const converted = brokerCases.slice(1).map(_case => {
     const [BrokerName, CaseId, CaseValue] = _case;
